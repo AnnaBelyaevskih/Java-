@@ -1,0 +1,251 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Test {
+    //1.2
+    public static int sumLastNums (int x) {
+        int last = x % 10;
+        int secondLast = (x / 10) % 10;
+        return last + secondLast;
+    }
+
+    //1.4
+    public static boolean isPositive (int x) {
+        return x > 0;
+    }
+
+    //1.6
+    public boolean isUpperCase (char x) {
+        return x >= 'A' && x <= 'Z';
+    }
+
+    //1.8
+    public boolean isDivisor (int a, int b) {
+        return a % b == 0 || b % a == 0;
+    }
+
+    //1.10
+    public int lastNumSum(int a, int b) {
+        return (a % 10) + (b % 10);
+
+    }
+
+    //2.2
+    public double safeDiv (int x, int y) {
+        if (y == 0) {
+            return 0;
+        }
+        return (double) x / y;
+    }
+
+    //2.4
+    public String makeDecision (int x, int y) {
+        if (x > y) {
+            return x + ">" + y;
+        } else if (x < y) {
+            return x + "<" + y;
+        } else {
+            return x + "==" + y;
+        }
+    }
+
+    //2.6
+    public boolean sum3 (int x, int y, int z) {
+        return (x + y == z) || (x + z == y  ) || (y + z == x);
+    }
+
+    //2.8
+    public String age (int x) {
+        int lastDigit = x % 10;
+        int twoDigit = x % 100;
+        if ( lastDigit == 1 && twoDigit != 11) {
+            return x + " год";
+        } else if ((lastDigit ==2 || lastDigit==3 || lastDigit==4 ) && (twoDigit != 12 && twoDigit!=13 && twoDigit != 14)) {
+            return x + " года";
+        } else {
+            return x + " лет";
+        }
+    }
+
+    //2.10
+    public void printDays (String x) {
+        String lowerCaseDay = x.toLowerCase();
+        switch (lowerCaseDay) {
+            case "понедельник":
+                System.out.println("понедельник");
+            case "вторник":
+                System.out.println("вторник");
+            case "среда":
+                System.out.println("среда");
+            case "четверг":
+                System.out.println("четверг");
+            case "пятница":
+                System.out.println("пятница");
+            case "суббота":
+                System.out.println("суббота");
+            case "воскресенье":
+                System.out.println("воскресенье");break;
+            default:
+                System.out.println("Это не день недели!");
+        }
+    }
+
+    //3.2
+    public String reverseListNums (int x) {
+        StringBuilder result = new StringBuilder();
+        for (int i = x; i >= 0; i--) {
+            result.append(i);
+            if (i > 0) {
+                result.append(" ");
+            }
+        }
+        return result.toString();
+    }
+
+    //3.4
+    public int pow (int x, int y) {
+        if (y == 0) return 1;
+        int result = 1;
+        for (int i = 0; i < y; i++ ) {
+            result *= x;
+        }
+        return result;
+    }
+
+    //3.6
+    public boolean equalNum (int x) {
+        if (x < 10 && x > -10) {
+            return true;
+        }
+        int lastNum = Math.abs(x) % 10;
+        int balance = Math.abs(x) / 10;
+        while (balance > 0) {
+            int currentNum = balance % 10;
+            if (currentNum != lastNum) {
+                return false;
+            }
+            balance = balance / 10;
+        }
+        return true;
+    }
+
+    //3.8
+    public void leftTriangle(int x) {
+        for (int i = 1; i <= x; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    //3.10
+    public void guessGame() {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        int randomNumber = random.nextInt(10);
+        int attempts = 0;
+        int userNum = -1;
+
+        while (userNum != randomNumber) {
+            System.out.print("Введите число от 0 до 9: ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Ошибка! Введите целое число.");
+                scanner.next();
+                continue;
+            }
+            userNum = scanner.nextInt();
+
+            if (userNum < 0 || userNum > 9) {
+                System.out.println("Число должно быть от 0 до 9!");
+                continue;
+            }
+            attempts++;
+
+            if (userNum == randomNumber) {
+                System.out.println("Вы угадали! Загаданное число: " + randomNumber);
+            } else {
+                System.out.print("Вы не угадали. ");
+            }
+        }
+        System.out.println("Вы отгадали число за " + attempts + " попытки(ок)");
+        scanner.close();
+    }
+
+    //4.2
+    public int findLast(int[] arr, int x) {
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] == x) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //4.4
+    public static int[] add(int[] arr, int x, int pos) {
+        if (pos < 0 || pos > arr.length) {
+            System.out.println("Позиция должна быть в диапазоне от 0 до " + arr.length);
+        }
+
+        int[] newArr = new int[arr.length + 1];
+
+        for (int i = 0; i < pos; i++) {
+            newArr[i] = arr[i];
+        }
+
+        newArr[pos] = x;
+
+        for (int i = pos; i < arr.length; i++) {
+            newArr[i + 1] = arr[i];
+        }
+
+        return newArr;
+    }
+
+    //4.6
+    public int[] reverseCopy(int[] arr) {
+        int[] reversed = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            reversed[i] = arr[arr.length - 1 - i];
+        }
+        return reversed;
+    }
+
+    //4.8
+    public int[] concat(int[] arr1, int[] arr2) {
+        int[] result = new int[arr1.length + arr2.length];
+
+        for (int i = 0; i < arr1.length; i++) {
+            result[i] = arr1[i];
+        }
+        for (int i = 0; i < arr2.length; i++) {
+            result[arr1.length + i] = arr2[i];
+        }
+
+        return result;
+    }
+
+    //4.10
+    public int[] deleteNegative(int[] arr) {
+        int count = 0;
+        for (int num : arr) {
+            if (num >= 0) {
+                count++;
+            }
+        }
+        int[] result = new int[count];
+
+        int index = 0;
+        for (int num : arr) {
+            if (num >= 0) {
+                result[index] = num;
+                index++;
+            }
+        }
+
+        return result;
+    }
+}
